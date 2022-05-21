@@ -30,6 +30,14 @@ function repl_midrules(m1, m2)
   end
 end
 
+function repl_multicol(m1, m2)
+  return m1 .. '{|' .. m2 .. '|}'
+end
+
+function repl_multicol_r(m1, m2)
+  return m1 .. '{' .. m2 .. '|}'
+end
+
 function Table(table)
   local returned_list
   local latex_code = ''
@@ -56,10 +64,15 @@ function Table(table)
           new_coldef = coldef:gsub('(.)', '|%1') .. '|'
         else
           -- asuming new style
-	  new_coldef = coldef:gsub('(>)', '|%1') .. '|'
-	end
-	latex_code = latex_code:sub(envdef:len() + 1)
+          new_coldef = coldef:gsub('(>)', '|%1') .. '|'
+        end
+        latex_code = latex_code:sub(envdef:len() + 1)
       end
+      -- fix multicolumn if needed
+      -- right rule on every multicol
+      latex_code = latex_code:gsub('(&%s*\\multicolumn{%d+}){([^}]+)}', repl_multicol_r)
+      -- left rule if it begins the row
+      latex_code = latex_code:gsub('(\n[^&]+\\multicolumn{%d+}){([^}]+)}', repl_multicol)
     end
 
     -- Add \midrules after each row if needed
