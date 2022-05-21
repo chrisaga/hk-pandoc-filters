@@ -1,43 +1,43 @@
-Greetings, a Lua Filter Template
+HK Pandoc Filters
 ==================================================================
 
-[![GitHub build status][CI badge]][CI workflow]
+<!--[![GitHub build status][CI badge]][CI workflow]-->
 
-Greetings is a friendly Lua filter that adds a welcoming message
-to the document.
+This repository hosts some [Lua filters][] I wrote for [Pandoc][], the universal document converter. Those filters are used to customize the way documents are converted from one format to another.
 
-This repository serves as a template intended to make publishing
-of pandoc [Lua filters][] easy and convenient. Just click "use
-this template" and then make modifications in your new repository.
-See also the GitHub documentation on [creating a repository from a
-template][from template].
+This repository is initially based on tarleb's (Albert Krewinkel) [lua-filter-template][] on github. As I decided to hos multiple filter in one repository, I adapted the structure to have one directory per filter. Docs, tests and Makefiles still need to be adapted.
 
+I you feel like developing your own filters, I strongly advise you to start with tarleb's template.
+
+[Pandoc]: https://pandoc.org
 [Lua filters]: https://pandoc.org/lua-filters.html
+[lua-filter-template]: https://github.com/tarleb/lua-filter-template
 [from template]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
-[CI badge]: https://img.shields.io/github/workflow/status/tarleb/lua-filter-template/CI?logo=github
-[CI workflow]: https://github.com/tarleb/lua-filter-template/actions/workflows/ci.yaml
+[CI badge]: https://img.shields.io/github/workflow/status/chrisaga/hk-pandoc-filters/CI?logo=github
+[CI workflow]: https://github.com/chrisaga/hk-pandoc-filters/actions/workflows/ci.yaml
 
-Checklist
+Use case
 ------------------------------------------------------------------
 
-This is just a template, so a few things should be changed to make
-good use of this template. You can use the checklist below to
-ensure that you get the most out of it. We recommend that you
-perform at least the first two steps, everything else is up to
-you.
+My main use case is to process Markdown files with [Pandoc][] to produce HTML and PDF documents with similar rendering. Plain Pandoc renders some document features in html not in pdf (or the other way around). I try to make HTML and PDF rendering the most looking alike possible.
 
-1. [ ] **Rename the filter**: rename the filter `greetings.lua` to
-   your chosen name. It's often a good idea to make the filter
-   name match the repository name: if your repository is named
-   `lorem`, then the filter should be named `lorem.lua`.
+Those filters can be used to process source file from multiple different formats . They are ineffective if output format is other than HTML, PDF, or LaTeX
 
-2. [ ] **Update the license**: The template is published under the
-   MIT, and we recommend to keep the same license for your code.
-   You should update the LICENSE file so it has your name.
 
-3. [ ] **Update this README**: describe your filter, so people
-   will know what to expect. You may also want to update the URLs
-   above to match your repository.
+List of filters
+------------------------------------------------------------------
+
+### column-div
+
+With this filter you can make fancy page layout using columns and colors using only Pandoc's Markdown fenced divs and no html code.
+
+
+### tables-rules
+
+This filters answers to the old "I want my tables to have vertical rules" problem. Whether table should have vertical rules or not is a barb-wired topic (look online). The fact is that sometimes we need to render cells with vertical and horizontal rules.
+
+All Markdown table formats supported by Pandoc are OK. HTML tables with multiple  column spanning cells are OK too.
+
 
 License
 ------------------------------------------------------------------
