@@ -67,12 +67,21 @@
 
 \begin{document}
 
-\begin{longtable}[]{@{}|l|l|l|l|@{}}
+\begin{longtable}[]{@{}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}|@{}}
 \toprule
-\multicolumn{4}{|l|}{Large cell spanning on 4 columns} \\
+\multicolumn{4}{|l|}{\begin{minipage}[b]{\linewidth}\raggedright
+Large cell spanning on 4 columns
+\end{minipage}} \\
 \midrule
 \endhead
-Name: & None & Updated by: & First-name Last-name \\
+Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
+First-name\\
+Last-name\strut
+\end{minipage} \\
 
 \midrule
 Something: & \multicolumn{3}{l|}{Large cell spanning 3 columns} \\
