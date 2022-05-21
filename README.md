@@ -1,7 +1,7 @@
 HK Pandoc Filters
 ==================================================================
 
-<!--[![GitHub build status][CI badge]][CI workflow]-->
+[![GitHub build status][CI badge]][CI workflow]
 
 This repository hosts some [Lua filters][] I wrote for [Pandoc][], the universal document converter. Those filters are used to customize the way documents are converted from one format to another.
 
