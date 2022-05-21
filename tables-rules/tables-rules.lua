@@ -21,11 +21,6 @@ function get_vars (meta)
   vars.hrules = meta['tables-hrules']
 end
 
-function repl_test(m1, m2)
-  print('|' .. m1 .. '||' .. m2 .. '|')
-  return m1 .. m2
-end
-
 function repl_midrules(m1, m2)
   if m2:match('^\\[%w]+rule') then
     -- don't double the rule
@@ -82,7 +77,6 @@ function Table(table)
 
     -- Add \midrules after each row if needed
     if vars.hrules then
-      latex_code = latex_code:gsub('(\\begin{minipage}.-\\end{minipage})?(.-\\)', repl_test)
       latex_code = latex_code:gsub('( \\\\\n)([\\%w]+)', repl_midrules)
     end
 
