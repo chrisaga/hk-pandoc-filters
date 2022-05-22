@@ -5,5 +5,8 @@ FILTERS = column-div tables-rules
 test expected docs:
 	$(foreach subdir,$(FILTERS),$(MAKE) -C $(subdir) $@;)
 
+test:
+	$(foreach subdir,$(FILTERS),cd $(subdir) && $(MAKE) $@;cd ..;)
+
 # Ensure that the `test` target is run each time it's called.
 .PHONY: test
