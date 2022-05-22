@@ -20,8 +20,8 @@ Introduction
 ------------
 Pandoc fenced divs can be very powerful allowing providing, in
 theory many document formating possibilities. Unfortunately, plain
-Panfoc processing doesn't make full adventage of it and discards
-some formating in HTML outputs and most of it in Latex outputs.
+Panfoc processing doesn't make full advantage of it and discards
+some formatting in HTML outputs and most of it in Latex outputs.
 
 Multiple columns in document are only partialy accessible in
 Beamer (not plain Latex) and HTML outputs.
@@ -30,7 +30,7 @@ As a result, it's not possible to render fancy multi columns
 PDF document from markdown sources.
 
 The main purpose of this filter is to make it possible and give
-similar formating features for both Latex/PDF and HTML outputs.
+similar formatting features for both Latex/PDF and HTML outputs.
 
 My guidelines are :
 
@@ -96,8 +96,7 @@ Some text formatted on 2 columns
 #### Uneven columns
 
 No specific Latex package are needed. We use Nested Pandoc divs in
-the same way that columns and column environments are used in
-Beamer/Latex.
+the same way that columns and column environments are used in Latex.
 
 **Example:**
 
@@ -130,6 +129,13 @@ first one is used. Other are ignored but allowed to help you to maintain
 a single markdown source for PDF and HTML outputs.
 The `data-latex=" … "` attribute allows you to pass options and
 parameters to the `\begin` environment instruction.
+
+#### Complicated layout in PDF or HTML
+
+You can achieve complicated multicolumn layout with text images and colors by using only Pandoc's Markdown fenced divs as shown below:
+
+![an example of a complicated layout](samples/what-you-can-expect.png){ height=400 }
+Here is the [md source file](samples/bigsample.md).
 
 To Do
 -----
