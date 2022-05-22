@@ -31,7 +31,7 @@ List of filters
 
 With this filter you can make fancy page layout using columns and colors using only Pandoc's Markdown fenced divs and no html code.
 
-[See details …](../column-div/README.md)
+[See details …](column-div.md)
 
 ### tables-rules
 
@@ -39,7 +39,7 @@ This filters answers to the old "I want my tables to have vertical rules" proble
 
 All Markdown table formats supported by Pandoc are OK. HTML tables with multiple  column spanning cells are OK too.
 
-[See details …](../tables-rules/README.md)
+[See details …](tables-rules.md)
 
 License
 ------------------------------------------------------------------
