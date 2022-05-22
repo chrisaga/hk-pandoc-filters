@@ -134,7 +134,8 @@ parameters to the `\begin` environment instruction.
 
 You can achieve complicated multicolumn layout with text images and colors by using only Pandoc's Markdown fenced divs as shown below:
 
-![an example of a complicated layout](samples/what-you-can-expect.png){ height=400 }
+<img src='samples/what-you-can-expect.png' width=400px alt='an example of a complicated layout'>
+
 Here is the [md source file](samples/bigsample.md).
 
 To Do
