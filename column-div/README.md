@@ -113,8 +113,7 @@ Some text or image using 80% of the page with.
 ::::::::
 ```
 
-* Beamer/Latex output is based on columns and column environments
-* Plain Latex (and PDF) rendering use minipage environments
+* Latex (and PDF) rendering use minipage environments
 * HTML rendering is not affected by this filter since Pandoc do it
 well already (based on divs with `width` attributes).
 
