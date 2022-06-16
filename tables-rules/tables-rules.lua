@@ -72,7 +72,7 @@ function Table(table)
       -- right rule on every multicol
       latex_code = latex_code:gsub('(&%s*\\multicolumn{%d+}){([^}]+)}', repl_multicol_r)
       -- left rule if it begins the row
-      latex_code = latex_code:gsub('(\n[^&]+\\multicolumn{%d+}){([^}]+)}', repl_multicol)
+      latex_code = latex_code:gsub('([^&]\n\\multicolumn{%d+}){([^}]+)}', repl_multicol)
     end
 
     -- Add \midrules after each row if needed

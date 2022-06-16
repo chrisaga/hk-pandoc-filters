@@ -99,4 +99,48 @@ Regular cell \\
 \bottomrule
 \end{longtable}
 
+\begin{longtable}[]{@{}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}|@{}}
+\toprule
+\multicolumn{4}{|l|}{\begin{minipage}[b]{\linewidth}\raggedright
+Large cell spanning on 4 columns
+\end{minipage}} \\
+\midrule
+\endhead
+\multicolumn{4}{|l|}{This is to test If coll span is at the beginning of a
+table} \\
+
+\midrule
+Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
+First-name\\
+Last-name\strut
+\end{minipage} \\
+
+\midrule
+\multicolumn{4}{|l|}{This is to test If coll span is at the beginning of a
+table} \\
+
+\midrule
+Something: & \multicolumn{3}{l|}{Large cell spanning 3 columns} \\
+
+\midrule
+Regular cell & \multicolumn{2}{l|}{Medium cell spanning 2 columns} &
+Regular cell \\
+
+\midrule
+\multicolumn{2}{|l|}{Medium cell spanning 2 columns} &
+\multicolumn{2}{l|}{Medium cell spanning 2 columns} \\
+
+\midrule
+\multicolumn{3}{|l|}{Large cell spanning 3 columns} & Some stuff \\
+
+\midrule
+\multicolumn{4}{|l|}{This is to test If coll span is at the beginning of a
+table} \\
+\bottomrule
+\end{longtable}
+
 \end{document}
