@@ -35,11 +35,18 @@ With this filter you can make fancy page layout using columns and colors using o
 
 ### tables-rules
 
-This filters answers to the old "I want my tables to have vertical rules" problem. Whether table should have vertical rules or not is a barb-wired topic (look online). The fact is that sometimes we need to render cells with vertical and horizontal rules.
+This filter answers to the old "I want my tables to have vertical rules" problem. Whether table should have vertical rules or not is a barb-wired topic (look online). The fact is that sometimes we need to render cells with vertical and horizontal rules.
 
 All Markdown table formats supported by Pandoc are OK. HTML tables with multiple  column spanning cells are OK too.
 
 [See details …](tables-rules/README.md)
+
+### pref-image-extension
+
+This filter choose the “best” file extension for an image referenced in the main document depending on the files which are available and on the output format. You can specify an extension or omit it all the way as in LaTeX source.
+
+
+[See details …](pref-image-extension/README.md)
 
 License
 ------------------------------------------------------------------

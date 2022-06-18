@@ -41,6 +41,14 @@ All Markdown table formats supported by Pandoc are OK. HTML tables with multiple
 
 [See details …](tables-rules.md)
 
+### pref-image-extension
+
+This filter choose the “best” file extension for an image referenced in the main document depending on the files which are available and on the output format. You can specify an extension or omit it all the way as in LaTeX source.
+
+
+[See details …](pref-image-extension.md)
+
+
 License
 ------------------------------------------------------------------
 
