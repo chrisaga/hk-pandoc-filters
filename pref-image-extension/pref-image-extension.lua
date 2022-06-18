@@ -16,7 +16,7 @@ TODO:	   - latex output : consider forcing extension to be empty since latex
 	     defaults.
 
 Limitations :
-           - don't know how to get resource-path, if defined
+     - don't know how to get resource-path, if defined
 		(not in environment; in some metadata?)
 	   - no way to prevent extension replacement for a particular image if a
 	     prefered one exists.
@@ -26,23 +26,7 @@ PANDOC_VERSION:must_be_at_least '2.12'
 
 local List = require 'pandoc.List'
 local path = require 'pandoc.path'
-local template = require 'pandoc.template'
 --local system = require 'pandoc.system'
-
-local vars = {}
-
-function get_vars(meta)
-  vars.empty = meta['emptyimageext']
-  --print(vars.sourcefile)
-
-end
-
---[[function tobo(doc)
-  local tplate=template.compile('tobo $curdir$ $sourcefile$ $outputfile$ tobo')
-  local txt = pandoc.write(doc, 'plain', {template=tplate})
-  print(txt)
-  return nil
-end]]
 
 function file_exists(name)
    local f=io.open(name,"r")
@@ -79,4 +63,3 @@ function Image(image)
   end
 end
 
-return {{Meta = get_vars}, {Image = Image}}
