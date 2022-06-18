@@ -33,14 +33,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={table-vrules lua filter test file},
-  pdfauthor={Christophe Agathon},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -63,6 +55,14 @@
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={table-vrules lua filter test file},
+  pdfauthor={Christophe Agathon},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
 
 \title{table-vrules lua filter test file}
 \author{Christophe Agathon}
@@ -76,13 +76,13 @@
 
 \begin{longtable}[]{@{}|r|l|c|l|@{}}
 \caption{Demonstration of simple table syntax.}\tabularnewline
-\toprule
+\toprule()
 Right & Left & Center & Default \\
-\midrule
+\midrule()
 \endfirsthead
-\toprule
+\toprule()
 Right & Left & Center & Default \\
-\midrule
+\midrule()
 \endhead
 12 & 12 & 12 & 12 \\
 
@@ -91,7 +91,7 @@ Right & Left & Center & Default \\
 
 \midrule
 1 & 1 & 1 & 1 \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{multiline-tables}{%
@@ -104,7 +104,7 @@ Right & Left & Center & Default \\
   |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3611}}|@{}}
 \caption{Here's the caption. It, too, may span multiple
 lines.}\tabularnewline
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\centering
 Centered Header
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -114,9 +114,9 @@ Right Aligned
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Left Aligned
 \end{minipage} \\
-\midrule
+\midrule()
 \endfirsthead
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\centering
 Centered Header
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -126,14 +126,14 @@ Right Aligned
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Left Aligned
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 First & row & 12.0 & Example of a row that spans multiple lines. \\
 
 \midrule
 Second & row & 5.0 & Here's another one. Note the blank line between
 rows. \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{grid-tables}{%
@@ -144,7 +144,7 @@ rows. \\
   |>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2222}}
   |>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2917}}|@{}}
 \caption{Sample grid table.}\tabularnewline
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Fruit
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -152,9 +152,9 @@ Price
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Advantages
 \end{minipage} \\
-\midrule
+\midrule()
 \endfirsthead
-\toprule
+\toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
 Fruit
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -162,7 +162,7 @@ Price
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Advantages
 \end{minipage} \\
-\midrule
+\midrule()
 \endhead
 Bananas & \$1.34 & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
@@ -184,7 +184,7 @@ Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
   tasty
 \end{itemize}
 \end{minipage} \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \hypertarget{pipes-tables}{%
@@ -192,13 +192,13 @@ Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
 
 \begin{longtable}[]{@{}|r|l|l|c|@{}}
 \caption{Demonstration of pipe table syntax.}\tabularnewline
-\toprule
+\toprule()
 Right & Left & Default & Center \\
-\midrule
+\midrule()
 \endfirsthead
-\toprule
+\toprule()
 Right & Left & Default & Center \\
-\midrule
+\midrule()
 \endhead
 12 & 12 & 12 & 12 \\
 
@@ -207,7 +207,7 @@ Right & Left & Default & Center \\
 
 \midrule
 1 & 1 & 1 & 1 \\
-\bottomrule
+\bottomrule()
 \end{longtable}
 
 \end{document}
