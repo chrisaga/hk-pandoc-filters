@@ -26,6 +26,7 @@ PANDOC_VERSION:must_be_at_least '2.12'
 
 local List = require 'pandoc.List'
 local path = require 'pandoc.path'
+local template = require 'pandoc.template'
 --local system = require 'pandoc.system'
 
 local vars = {}
@@ -33,7 +34,15 @@ local vars = {}
 function get_vars(meta)
   vars.empty = meta['emptyimageext']
   --print(vars.sourcefile)
+
 end
+
+--[[function tobo(doc)
+  local tplate=template.compile('tobo $curdir$ $sourcefile$ $outputfile$ tobo')
+  local txt = pandoc.write(doc, 'plain', {template=tplate})
+  print(txt)
+  return nil
+end]]
 
 function file_exists(name)
    local f=io.open(name,"r")
@@ -54,16 +63,17 @@ function Image(image)
     pref_ext = { 'svg'; 'jpg'; 'jpeg'; 'png' }
   end
   -- chose 'best' extension
-  if pref_ext then
-    for _,ext in pairs(pref_ext) do
-      if file_exists(path .. '.' .. ext) then
-        image.src = path .. '.' .. ext
+  if not pref_ext then
+    return nil
+  end
+  for _,ext in pairs(pref_ext) do
+    if file_exists(path .. '.' .. ext) then
+      image.src = path .. '.' .. ext
+      return image
+    else  -- if image doesn't exist yet, let LaTeX chose latter
+      if FORMAT:match 'latex' then
+        image.src = path
         return image
-      else  -- if image doesn't exist yet, let LaTeX chose latter
-        if FORMAT:match 'latex' then
-          image.src = path
-          return image
-        end
       end
     end
   end
