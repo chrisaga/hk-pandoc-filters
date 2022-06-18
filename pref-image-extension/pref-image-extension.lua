@@ -8,10 +8,10 @@ pref-image-extension
 Copyright:  © 2021 Christophe Agathon <christophe.agathon@gmail.com>
 License:    MIT – see LICENSE file for details
 
-Output:	    pdf, html
+Output:	    latex, pdf, html
 
-TODO:	   - latex output : force extension to be empty since latex has it's own
-	     prefered image format mechanysm.
+TODO:	   - latex output : consider forcing extension to be empty since latex
+       has it's own prefered image format mechanysm.
 	   - get list of prefered extension in metadata to override hardcoded
 	     defaults.
 
@@ -27,6 +27,13 @@ PANDOC_VERSION:must_be_at_least '2.12'
 local List = require 'pandoc.List'
 local path = require 'pandoc.path'
 --local system = require 'pandoc.system'
+
+local vars = {}
+
+function get_vars(meta)
+  vars.empty = meta['emptyimageext']
+  --print(vars.sourcefile)
+end
 
 function file_exists(name)
    local f=io.open(name,"r")
@@ -44,14 +51,22 @@ function Image(image)
   if FORMAT:match 'latex' then
     pref_ext = { 'pdf'; 'png'; 'jpg'; 'jpeg' }
   elseif FORMAT:match 'html' then
-    pref_ext = { 'svg'; 'png'; 'jpg'; 'jpeg' }
+    pref_ext = { 'svg'; 'jpg'; 'jpeg'; 'png' }
   end
-
   -- chose 'best' extension
-  for _,ext in pairs(pref_ext) do
-    if file_exists(path .. '.' .. ext) then
-      image.src = path .. '.' .. ext
-      return image
+  if pref_ext then
+    for _,ext in pairs(pref_ext) do
+      if file_exists(path .. '.' .. ext) then
+        image.src = path .. '.' .. ext
+        return image
+      else  -- if image doesn't exist yet, let LaTeX chose latter
+        if FORMAT:match 'latex' then
+          image.src = path
+          return image
+        end
+      end
     end
   end
 end
+
+return {{Meta = get_vars}, {Image = Image}}
