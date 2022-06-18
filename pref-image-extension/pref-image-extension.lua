@@ -8,15 +8,15 @@ pref-image-extension
 Copyright:  © 2021 Christophe Agathon <christophe.agathon@gmail.com>
 License:    MIT – see LICENSE file for details
 
-Output:	    pdf, html
+Output:	    latex, pdf, html
 
-TODO:	   - latex output : force extension to be empty since latex has it's own
-	     prefered image format mechanysm.
+TODO:	   - latex output : consider forcing extension to be empty since latex
+       has it's own prefered image format mechanysm.
 	   - get list of prefered extension in metadata to override hardcoded
 	     defaults.
 
 Limitations :
-           - don't know how to get resource-path, if defined
+     - don't know how to get resource-path, if defined
 		(not in environment; in some metadata?)
 	   - no way to prevent extension replacement for a particular image if a
 	     prefered one exists.
@@ -44,14 +44,22 @@ function Image(image)
   if FORMAT:match 'latex' then
     pref_ext = { 'pdf'; 'png'; 'jpg'; 'jpeg' }
   elseif FORMAT:match 'html' then
-    pref_ext = { 'svg'; 'png'; 'jpg'; 'jpeg' }
+    pref_ext = { 'svg'; 'jpg'; 'jpeg'; 'png' }
   end
-
   -- chose 'best' extension
+  if not pref_ext then
+    return nil
+  end
   for _,ext in pairs(pref_ext) do
     if file_exists(path .. '.' .. ext) then
       image.src = path .. '.' .. ext
       return image
+    else  -- if image doesn't exist yet, let LaTeX chose latter
+      if FORMAT:match 'latex' then
+        image.src = path
+        return image
+      end
     end
   end
 end
+
