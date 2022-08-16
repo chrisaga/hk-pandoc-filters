@@ -13,10 +13,10 @@ on:
       - 'README.md'
       - LICENSE
       - .editorconfig
-  # Test if things still work each Tuesday morning at 5:39 UTC
-  schedule:
-    # At 5:39am each Tuesday
-    - cron: '39 5 * * 2'
+  ## Test if things still work each Tuesday morning at 5:39 UTC
+  #schedule:
+  #  # At 5:39am each Tuesday
+  #  - cron: '39 5 * * 2'
 
 jobs:
   test:
