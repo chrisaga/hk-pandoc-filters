@@ -29,7 +29,7 @@ Usage
 
 ### Formating the document
 
-Use Pandoc's markdown fenced divs to embed the diagram code in your markdown source. Code can be : PlantUML, GraphViz, LaTeX/Ti*k*Z, Python, Asymptote.
+Use Pandoc's markdown code blocks to embed the diagram code in your markdown source. Code can be : PlantUML, GraphViz, LaTeX/Ti*k*Z, Python, Asymptote.
 
 ~~~ {.markdown}
 
@@ -53,19 +53,15 @@ With classname in :
 
 ### Rendering the document
 
-Copy `pref-image-extension.lua` in your document folder or in your
+Copy `latex_hk_writer.lua` in your document folder or in your
 pandoc data directory (details in
-[Pandoc's manual](https://pandoc.org/MANUAL.html#option--lua-filter)).
+[Pandoc's manual](https://pandoc.org/MANUAL.html#custom-readers-and-writers)).
 Run it on your document with a `--luafilter` option:
 
 ```bash
-pandoc --luafilter pref-image-extension.lua SOURCE.md -o OUTPUT.pdf
+pandoc --write=latex_hk_writer.lua --template=default.latex --pdf-engine=pdflatex -o OUTPUT.pdf SOURCE.md
 
 ```
-
-or specify it in a defaults file (details in
-[Pandoc's manual](https://pandoc.org/MANUAL.html#option--defaults)).
-
 
 
 ## Limitations
@@ -86,7 +82,7 @@ I initially looked at `diagram-generator.lua`'s code to deal with issues I had w
 I understand it's complicated to build a stable solution for both Windows and Linux (and others), but *why on earth should I struggle with an image conversion when rendering PDF files ?*
 
 * PDF files are rendered via LaTeX which is used to render the Ti*k*Z images. Why not properly embed the Ti*k*Z code in the LaTeX document ?
-* PlantUML and GraphViz can output PDF images suitable for processing with `pdflatex`. Better then, They can output Ti*k*Z code whit put us back to the previous case.
+* PlantUML and GraphViz can output PDF images suitable for processing with `pdflatex`. Better then, They can output Ti*k*Z code whitch put us back to the previous case.
 * Python can output PDF images with the proper call to `plt.savefig`
 * A quick search on [Asymptote documentation](https://asymptote.sourceforge.io/doc/LaTeX-usage.html) shows that it seems to live pretty well with LaTeX and allows ebedding code in LaTeX too.
 

@@ -5,7 +5,7 @@ local List = require 'pandoc.List'
 local pipe = pandoc.pipe
 
 function Writer (doc, opts)
-  local plantuml_path='/usr/local/bin/plantuml'
+  local plantuml_path='plantuml'
 
   local filter = {
     CodeBlock = function (block)
@@ -13,7 +13,8 @@ function Writer (doc, opts)
       -- only modify if code bloc have right class
       -- TODO: make a table of function
       if block.classes:includes('tikz') then
-        rawcode = block.text
+        rawcode = '\\begin{tikzpicture}' .. block.text ..'\\end{tikzpicture}'
+	-- TODO: don't add environment if already in code for backward comp
       elseif block.classes:includes('plantuml') then
         rawcode = pipe(plantuml_path,
                       {'-tlatex:nopreamble', '-pipe', '-charset', 'UTF-8'},
@@ -21,10 +22,10 @@ function Writer (doc, opts)
       end
 
       if rawcode then
-        rawcode = '\\begin{figure}\\centering' .. rawcode
 
         -- If the user defines a caption, read it as Markdown.
         if block.attributes.caption  then
+          rawcode = '\\begin{figure}\\centering' .. rawcode
           local caption = block.attributes.caption
           and pandoc.read(block.attributes.caption).blocks
           or {}
@@ -32,9 +33,9 @@ function Writer (doc, opts)
           rawcode = rawcode .. '\\caption{'
                     .. pandoc.write(pandoc.Pandoc(caption), 'latex')
                     .. '}'
-        end
-
         rawcode = rawcode .. '\\end{figure}'
+        end
+        -- TODO: handle \usetikzlibrary as it was in the original filter
 
         return pandoc.RawBlock('latex', rawcode)
       end
