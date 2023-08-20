@@ -44,7 +44,8 @@ The filter adds some code in the Latex preamble because Pandoc adds it only if t
 
 You would probably call this filter after your other filters since it generates raw LaTeX code for every table in the document. Pandoc blocs and inlines are no longer available for subsequent filters.
 
-This might be better to do this in a writer than in a filter unfortunately writers are not modular like filters and one would have to implement the whole LaTeX writer to do this.
+~This might be better to do this in a writer than in a filter unfortunately writers are not modular like filters and one would have to implement the whole LaTeX writer to do this.~
+UPDATE : custom writers in Pandoc have been redesigned so it's now an option.
 
 ### Compatibility
 
@@ -58,10 +59,13 @@ Usage
 
 ### Formating the document
 
-Simply use one of the table synthax allowed by Pandoc (details in
+With a Markdown document, simply use one of the table synthax allowed by Pandoc (details in
 [Pandoc's manual](https://pandoc.org/MANUAL.html#tables).
 
-Set `tables-vrules: true` and/or `tables-hrules: true` in the YAML preamble to get rules on all the tables of the document.
+To get rules on all the tables of the document, you can either :
+
+* Set `tables-vrules: true` and/or `tables-hrules: true` in the YAML preamble of your Marldown document
+* Add  `--metadata=tables-vrules` and/or `--metadata=tables-hrules` to your Pandoc command (especially if your source document is not Markdown, but HTML or something else)
 
 
 ### Rendering the document
@@ -79,7 +83,7 @@ pandoc --luafilter tables-rules.lua SOURCE.md -o OUTPUT.pdf
 or specify it in a defaults file (details in
 [Pandoc's manual](https://pandoc.org/MANUAL.html#option--defaults)).
 
-This will generate Tables with vertical rules in Latex and PDF documents from Pandoc markdown source files.
+This will generate Tables with vertical and/or horizontal rules in Latex and PDF documents from Pandoc markdown source files.
 
 ### Limitations
 
