@@ -49,10 +49,10 @@ contents...
 :::
 ::::::
 :::::: {.columns}
-::: {.column width="20%" valign="b"}
+::: {.column width="50%" valign="b"}
 contents...
 :::
-::: {.column width="80%" valign="b"}
+::: {.column width="50%" valign="b"}
 contents...
 :::
 ::::::

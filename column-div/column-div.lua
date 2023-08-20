@@ -2,7 +2,7 @@
 column-div - leverage Pandoc native divs to make balanced and unbalanced column
              and other things based on class name and attributes.
 
-Copyright:  © 2021 Christophe Agathon <christophe.agathon@gmail.com>
+Copyright:  © 2021 - 2023 Christophe Agathon <christophe.agathon@gmail.com>
 License:    MIT – see LICENSE file for details
 
 Credits:    Romain Lesur and Yihui Xie for the original column filter
@@ -46,21 +46,17 @@ function Div(div)
       opt = div.attributes.width
       if opt then
         local width=tonumber(string.match(opt,'(%f[%d]%d[,.%d]*%f[%D])%%'))/100
-        options = '{' .. tostring(width)
-        if div.attributes['background-color'] then
-          -- fix the width for the \colorbox
           options = '{\\dimexpr' .. tostring(width)
-                    .. '\\columnwidth-4\\fboxsep\\relax}'
-        else
-          options = '{' .. tostring(width) .. '\\columnwidth}'
-        end
+                    .. '\\columnwidth-4\\fboxsep\\relax}' --TODO: verify calculation (warnings)
       end
 
       opt = div.attributes.valign
       if opt then options = '[' .. opt .. ']' .. options end
 
+      -- open a minipage and restore the parskip value 'cause it's reset
       begin_env = List:new{pandoc.RawBlock('tex',
-                                           '\\begin{minipage}' .. options)}
+                                           '\\begin{minipage}' .. options .. '\\setlength{\\parskip}{\\currentparskip}')}
+      -- TODO: set a 'compact' option to keep default parskip behaviour
       end_env = List:new{pandoc.RawBlock('tex', '\\end{minipage}')}
 
       -- add support for color
@@ -69,6 +65,22 @@ function Div(div)
         begin_env = begin_env .. List:new{pandoc.RawBlock('tex',
                                                       '\\color{' .. opt .. '}')}
         div.attributes.color = nil    -- consume attribute
+      end
+
+      -- add support for font-family
+      opt = div.attributes['font-family']
+      if opt then
+        begin_env = begin_env .. List:new{pandoc.RawBlock('tex',
+                                                      '\\' .. opt)}
+        div.attributes['font-family'] = nil    -- consume attribute
+      end
+
+      -- add support for font-size
+      opt = div.attributes['font-size']
+      if opt then
+        begin_env = begin_env .. List:new{pandoc.RawBlock('tex',
+                                                      '\\' .. opt)}
+        div.attributes['font-size'] = nil    -- consume attribute
       end
 
       opt = div.attributes['background-color']
@@ -83,9 +95,20 @@ function Div(div)
       returned_list = begin_env .. div.content .. end_env
 
     elseif div.classes:includes('columns') then
-      -- it turns-out that asimple Tex \mbox do the job
-      begin_env = List:new{pandoc.RawBlock('tex', '\\mbox{')}
+       --save the parskip value and open set an mbox
+      begin_env = List:new{pandoc.RawBlock('tex', '\\setlength{\\currentparskip}{\\parskip}\\mbox{')}
       end_env = List:new{pandoc.RawBlock('tex', '}')}
+
+      -- attribute 'noskip' avoid space before and after the box
+      opt = div.attributes.noskip
+      if opt then
+	div.attributes.noskip = nil    -- consume attribute
+      else
+	begin_env = List:new{pandoc.RawBlock('tex', '\\bigskip' )}
+                    .. begin_env
+        end_env = end_env .. List:new{pandoc.RawBlock('tex', '\\bigskip')}
+      end
+
       returned_list = begin_env .. div.content .. end_env
 
     else
@@ -95,12 +118,16 @@ function Div(div)
         -- process supported options
         opt = div.attributes['column-count']
         if opt then options = '{' .. opt .. '}' end
-      end
-
-      begin_env = List:new{pandoc.RawBlock('tex',
+        begin_env = List:new{pandoc.RawBlock('tex',
                                     '\\begin{' .. env .. '}' .. options)}
-      end_env = List:new{pandoc.RawBlock('tex', '\\end{' .. env .. '}')}
-      returned_list = begin_env .. div.content .. end_env
+        end_env = List:new{pandoc.RawBlock('tex', '\\end{' .. env .. '}')}
+
+      else
+	env = nil -- we don't allow random environment
+      end
+      if env then -- write environment and content
+        returned_list = begin_env .. div.content .. end_env
+      end
     end
 
   -- if the format is html add what is not already done by plain pandoc
@@ -147,7 +174,8 @@ end
 function Meta(meta)
   -- Include  multicol latex package to get balanced columns in latex or pdf
 
-  includes = [[\usepackage{multicol}]]
+  includes = [[\usepackage{multicol}
+  \newlength{\currentparskip}]]
 
   if FORMAT:match 'latex' then
     if meta['header-includes'] then

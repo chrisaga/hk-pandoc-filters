@@ -38,6 +38,7 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{multicol}
+  \newlength{\currentparskip}
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -80,52 +81,42 @@ content\ldots{}
 \hypertarget{two-uneven-columns}{%
 \subsection{Two uneven columns}\label{two-uneven-columns}}
 
-\mbox{
+\bigskip
 
-\begin{minipage}[b]{0.3\columnwidth}
+\setlength{\currentparskip}{\parskip}\mbox{
+
+\begin{minipage}[b]{\dimexpr0.3\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 contents\ldots{}
 
 \end{minipage}
 
-\begin{minipage}[b]{0.7\columnwidth}
+\begin{minipage}[b]{\dimexpr0.7\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 contents\ldots{}
 
 \end{minipage}
 
 }
+
+\bigskip
 
 \hypertarget{columns-in-columns}{%
 \subsection{Columns in columns}\label{columns-in-columns}}
 
 \begin{multicols}{3}
 
-\mbox{
+\bigskip
 
-\begin{minipage}[b]{0.2\columnwidth}
+\setlength{\currentparskip}{\parskip}\mbox{
 
-contents\ldots{}
-
-\end{minipage}
-
-\begin{minipage}[b]{0.8\columnwidth}
+\begin{minipage}[b]{\dimexpr0.2\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 contents\ldots{}
 
 \end{minipage}
 
-}
-
-\mbox{
-
-\begin{minipage}[b]{0.2\columnwidth}
-
-contents\ldots{}
-
-\end{minipage}
-
-\begin{minipage}[b]{0.8\columnwidth}
+\begin{minipage}[b]{\dimexpr0.8\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 contents\ldots{}
 
@@ -133,30 +124,58 @@ contents\ldots{}
 
 }
 
-\mbox{
+\bigskip
 
-\begin{minipage}[b]{0.2\columnwidth}
+\bigskip
+
+\setlength{\currentparskip}{\parskip}\mbox{
+
+\begin{minipage}[b]{\dimexpr0.2\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 contents\ldots{}
 
 \end{minipage}
 
-\begin{minipage}[b]{0.8\columnwidth}
+\begin{minipage}[b]{\dimexpr0.8\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 contents\ldots{}
 
 \end{minipage}
 
 }
+
+\bigskip
+
+\bigskip
+
+\setlength{\currentparskip}{\parskip}\mbox{
+
+\begin{minipage}[b]{\dimexpr0.5\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
+
+contents\ldots{}
+
+\end{minipage}
+
+\begin{minipage}[b]{\dimexpr0.5\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
+
+contents\ldots{}
+
+\end{minipage}
+
+}
+
+\bigskip
 
 \end{multicols}
 
 \hypertarget{columns-and-colors}{%
 \subsection{Columns and Colors}\label{columns-and-colors}}
 
-\mbox{
+\bigskip
 
-\begin{minipage}{0.4\columnwidth}
+\setlength{\currentparskip}{\parskip}\mbox{
+
+\begin{minipage}{\dimexpr0.4\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 \color{blue}
 
@@ -166,7 +185,7 @@ blue content\ldots{}
 
 \colorbox{red}{
 
-\begin{minipage}{\dimexpr0.6\columnwidth-4\fboxsep\relax}
+\begin{minipage}{\dimexpr0.6\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 content on red background\ldots{}
 
@@ -176,11 +195,15 @@ content on red background\ldots{}
 
 }
 
-\mbox{
+\bigskip
+
+\bigskip
+
+\setlength{\currentparskip}{\parskip}\mbox{
 
 \colorbox{red}{
 
-\begin{minipage}{\dimexpr0.6\columnwidth-4\fboxsep\relax}
+\begin{minipage}{\dimexpr0.6\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 \color{blue}
 
@@ -190,12 +213,14 @@ blue content on red background\ldots{}
 
 }
 
-\begin{minipage}{0.4\columnwidth}
+\begin{minipage}{\dimexpr0.4\columnwidth-4\fboxsep\relax}\setlength{\parskip}{\currentparskip}
 
 contents\ldots{}
 
 \end{minipage}
 
 }
+
+\bigskip
 
 \end{document}
