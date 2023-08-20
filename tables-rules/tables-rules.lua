@@ -31,11 +31,11 @@ function repl_midrules(m1, m2)
 end
 
 function repl_multicol(m1, m2)
-  return m1 .. '{|' .. m2 .. '|}'
-end
-
-function repl_multicol_r(m1, m2)
-  return m1 .. '{' .. m2 .. '|}'
+  if m2:match('@{}}$') then
+    return m1 .. m2:gsub('@{}>','@{}|>'):gsub('(@{}})$','|%1')
+  else
+    return m1 .. m2:gsub('@{}>','@{}|>'):gsub('}$','|}')
+  end
 end
 
 function Table(table)
@@ -56,23 +56,23 @@ function Table(table)
     -- Rewrite column definition to add vertical rules if needed
     if vars.vrules then
       envdef, begdef, coldef, enddef =
-          latex_code:match("((\\begin{longtable}%[[^%]]*%]{@{})(.*)(@{}}))")
+          latex_code:match("((\\begin{longtable}%[[^%]]*%]{@{})([^@]+)(@{}}))")
 
+-- print("#" .. coldef ..'#')
       if coldef then
         if coldef:match('^[lrc]+$') then
           -- old style
-          new_coldef = coldef:gsub('(.)', '|%1') .. '|'
+          new_coldef = coldef:gsub('(.)', '|%1')
         else
           -- asuming new style
-          new_coldef = coldef:gsub('(>)', '|%1') .. '|'
+          new_coldef = coldef:gsub('(>)', '|%1')
         end
         latex_code = latex_code:sub(envdef:len() + 1)
       end
       -- fix multicolumn if needed
-      -- right rule on every multicol
-      latex_code = latex_code:gsub('(&%s*\\multicolumn{%d+}){([^}]+)}', repl_multicol_r)
-      -- left rule if it begins the row
-      latex_code = latex_code:gsub('([^&]\n\\multicolumn{%d+}){([^}]+)}', repl_multicol)
+      -- Set left and/or right rule if cell begins and/or ends the row
+      latex_code = latex_code:gsub('(\\multicolumn{%d+})(%b{})',
+				   repl_multicol)
     end
 
     -- Add \midrules after each row if needed
@@ -83,7 +83,7 @@ function Table(table)
     -- Return modified latex code as a raw block
     if vars.vrules then
       returned_list = List:new{pandoc.RawBlock('tex',
-                               begdef .. new_coldef .. enddef ..
+                               begdef .. new_coldef .. '|' .. enddef ..
                                latex_code)}
     else
       returned_list = List:new{pandoc.RawBlock('tex', latex_code)}
