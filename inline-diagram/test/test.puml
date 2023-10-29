@@ -1,0 +1,55 @@
+@startwbs
+*:AIF (SNC
+Philippe Thibault;
+
+++:GSI
+Pascal Croc
+//Le nouveau SI//;
+
++++: DevOps CI/CD
+et outils communs
+Catherine (Cathie) Mery;
+
+----:**Anne Demaret**
+(prononcer comme de Maret,
+ elle y tient)
+Manager
+Responsable du programme
+**Cloud Acceleration**;
+
++++-:**Moi**
+Manager de transition
+Remplaçant d'Anne Demaret;
+
+++:TAD
+**Bertrand Le Sage**
+//Le SI Legacy à//
+//Décommissionner//;
+
+++:IF&IS
+Raffaella Cortellesi
+Infrastructures et sécurité
+//En termes d'orga,//
+//le programme Cloud//
+//Acceleration est//
+//chez eux//;
+
++++: Infrastructure Services
+Laurent Nys;
+
+****< Network
+****> Workplace Services
+****< Data Center\n& Cloud Services
+****> Information Security
+
+**:CTO
+Philippe Thibault
+//CTO+Transfo//;
+
+***:Procurement
+Didier Conoir Rolland
+//Les Achats//
+Acheteur en charge du
+RFP à identifier;
+
+@endwbs
