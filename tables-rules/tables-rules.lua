@@ -16,6 +16,7 @@ local List = require 'pandoc.List'
 
 local vars = {}
 
+-- Get vars from metadata
 function get_vars (meta)
   vars.vrules = meta['tables-vrules']
   vars.hrules = meta['tables-hrules']
@@ -26,68 +27,96 @@ function repl_midrules(m1, m2)
     -- don't double the rule
     return m1 .. m2
   else
-    return m1 .. '\n\\midrule\n' .. m2
+    return m1 .. '\\midrule\n' .. m2
   end
 end
 
-function repl_multicol(m1, m2)
-  if m2:match('@{}}$') then
-    return m1 .. m2:gsub('@{}>','@{}|>'):gsub('(@{}})$','|%1')
-  else
-    return m1 .. m2:gsub('@{}>','@{}|>'):gsub('}$','|}')
-  end
+-- Fix individual column definition :
+--  add right vertical rule
+--  adjust width for column separtion and rule width
+function fix_coldef(m1, m2)
+  n=m2:match('%(\\columnwidth %- ([%d%.]+)\\tabcolsep%)')
+  return m1:gsub('[%d%.]+(\\tabcolsep)',
+                 string.format('%d',n+2) .. '%1 - ' ..
+                 string.format('%d',n/2) ..'\\arrayrulewidth') .. '|'
 end
 
+-- Fix "simple style" column definition
+function fix_simplestyle(m1,m2,m3)
+  return m1 .. m2:gsub('(.)','%1|') .. m3
+end
+
+-- Fix columns definitions for vertical rules
+-- N.B. The \extracolsep substract the rule width to the column spacing
+--      this could be a broblem with very thick lines
+--      I think this is a bug somewhere in longtable | array | booktab
+--      since the rule is added to the column separator (see array manual)
+--      This seems to substract two times (left and right ??? not clear)
+function fix_colsdefs(m)
+  return m:gsub('^{@{}', '{@{\\extracolsep{-\\arrayrulewidth}}|')
+          :gsub('@{}}$', '}')
+          :gsub('(>%b{}%l(%b{}))', fix_coldef) -- rich style
+          :gsub('({@%b{}|)(%l+)(})', fix_simplestyle) -- simple style
+end
+
+-- Adjust minipage width for column separators
+-- Substract \tabcolsep two times (left and rigth of the cell)
+-- N.B. Substracting \arrayrulewidth is needed to avoid warnings
+--      is it linked to the possible bug mentioned above ?
+function adjust_minipage(m1, m2, m3)
+  return m1 .. m2:gsub('}', ' - 2\\tabcolsep -2\\arrayrulewidth}')
+            .. m3
+end
+
+-- Give some space to minipages between text and horizontal rule
+function pad_minipage(m1, m2, m3)
+  return m1 .. m2 .. '\\smallskip\n' .. m3
+end
+
+-- Fix multicolumn cells
+function fix_multicol(command, coldef, content)
+  return command .. coldef:gsub('@{}','|') ..
+          content:gsub('(\\begin{minipage}%b[])(%b{})(.*\\end{minipage})',
+          adjust_minipage)
+end
+
+-- Main filter function
 function Table(table)
   local returned_list
-  local latex_code = ''
-  local coldef =''
-  local envdef =''
-  local new_coldef =''
-  local end_line = ''
+  local begin_env, env_content, end_env
 
   if not vars.vrules and not vars.hrules then return nil end
 
   if FORMAT:match 'latex' then
 
     -- Get latex code for the whole table
-    latex_code = pandoc.write ( pandoc.Pandoc({table}),'latex' )
+    begin_env, env_content, end_env =
+       pandoc.write ( pandoc.Pandoc({table}),'latex' )
+         :match('(\\begin{longtable}%b[]%b{})(.*)(\\end{longtable})')
 
     -- Rewrite column definition to add vertical rules if needed
+    -- N.B. Pandoc suppresses left and right spacing with @{}
     if vars.vrules then
-      envdef, begdef, coldef, enddef =
-          latex_code:match("((\\begin{longtable}%[[^%]]*%]{@{})([^@]+)(@{}}))")
-
--- print("#" .. coldef ..'#')
-      if coldef then
-        if coldef:match('^[lrc]+$') then
-          -- old style
-          new_coldef = coldef:gsub('(.)', '|%1')
-        else
-          -- asuming new style
-          new_coldef = coldef:gsub('(>)', '|%1')
-        end
-        latex_code = latex_code:sub(envdef:len() + 1)
-      end
-      -- fix multicolumn if needed
-      -- Set left and/or right rule if cell begins and/or ends the row
-      latex_code = latex_code:gsub('(\\multicolumn{%d+})(%b{})',
-				   repl_multicol)
+      -- Fix columns definitions in longtable environment
+      begin_env = begin_env:gsub('(%b{})$', fix_colsdefs)
+--print('#' .. begin_env ..'#')
+      -- Fix multicol cells if any
+      env_content=env_content:gsub('(\\multicolumn%b{})(%b{})(%b{})',
+                                    fix_multicol)
     end
 
     -- Add \midrules after each row if needed
     if vars.hrules then
-      latex_code = latex_code:gsub('( \\\\\n)([\\%w]+)', repl_midrules)
+      env_content = env_content:gsub('( \\\\\n)([\\%w]+)', repl_midrules)
+                   :gsub('(\\begin{minipage}%b[])(%b{})(.*\\end{minipage})',
+                   pad_minipage)
+--print('#' .. env_content ..'#')
     end
 
     -- Return modified latex code as a raw block
-    if vars.vrules then
-      returned_list = List:new{pandoc.RawBlock('tex',
-                               begdef .. new_coldef .. '|' .. enddef ..
-                               latex_code)}
-    else
-      returned_list = List:new{pandoc.RawBlock('tex', latex_code)}
-    end
+    --
+    returned_list = List:new{pandoc.RawBlock('tex',
+                               begin_env .. env_content .. end_env)}
   end
   return returned_list
 end

@@ -5,16 +5,19 @@
 \documentclass[
 ]{article}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -57,7 +60,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
@@ -67,94 +70,81 @@
 
 \begin{document}
 
-\begin{longtable}[]{@{}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}|@{}}
-\toprule()
-\multicolumn{4}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}|@{}}{%
-\begin{minipage}[b]{\linewidth}\raggedright
+\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|}
+\toprule\noalign{}
+\multicolumn{4}{|l|}{%
+\begin{minipage}[b]{\linewidth - 2\tabcolsep -2\arrayrulewidth}\smallskip
+\raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
 First-name\\
 Last-name\strut
 \end{minipage} \\
-
 \midrule
-Something: &
-\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}|@{}}{%
+Something: & \multicolumn{3}{l|}{%
 Large cell spanning 3 columns} \\
-
 \midrule
-Regular cell &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}|}{%
+Regular cell & \multicolumn{2}{l}{%
 Medium cell spanning 2 columns} & Regular cell \\
-
 \midrule
-\multicolumn{2}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}|}{%
-Medium cell spanning 2 columns} &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}|@{}}{%
+\multicolumn{2}{|l}{%
+Medium cell spanning 2 columns} & \multicolumn{2}{l|}{%
 Medium cell spanning 2 columns} \\
-
 \midrule
-\multicolumn{3}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}|}{%
+\multicolumn{3}{|l}{%
 Large cell spanning 3 columns} & Some stuff \\
-\bottomrule()
 \end{longtable}
 
-\begin{longtable}[]{@{}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}|@{}}
-\toprule()
-\multicolumn{4}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}|@{}}{%
-\begin{minipage}[b]{\linewidth}\raggedright
+\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|}
+\toprule\noalign{}
+\multicolumn{4}{|l|}{%
+\begin{minipage}[b]{\linewidth - 2\tabcolsep -2\arrayrulewidth}\smallskip
+\raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
-\midrule()
+\midrule\noalign{}
 \endhead
-\multicolumn{4}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}|@{}}{%
+\bottomrule\noalign{}
+\endlastfoot
+\multicolumn{4}{|l|}{%
 This is to test If coll span is at the beginning of a table} \\
-
 \midrule
 Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
 First-name\\
 Last-name\strut
 \end{minipage} \\
-
 \midrule
-\multicolumn{4}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}|@{}}{%
+\multicolumn{4}{|l|}{%
 This is to test If coll span is at the beginning of a table} \\
-
 \midrule
-Something: &
-\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}|@{}}{%
+Something: & \multicolumn{3}{l|}{%
 Large cell spanning 3 columns} \\
-
 \midrule
-Regular cell &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}|}{%
+Regular cell & \multicolumn{2}{l}{%
 Medium cell spanning 2 columns} & Regular cell \\
-
 \midrule
-\multicolumn{2}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}|}{%
-Medium cell spanning 2 columns} &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}|@{}}{%
+\multicolumn{2}{|l}{%
+Medium cell spanning 2 columns} & \multicolumn{2}{l|}{%
 Medium cell spanning 2 columns} \\
-
 \midrule
-\multicolumn{3}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}|}{%
+\multicolumn{3}{|l}{%
 Large cell spanning 3 columns} & Some stuff \\
-
 \midrule
-\multicolumn{4}{@{}|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}|@{}}{%
+\multicolumn{4}{|l|}{%
 This is to test If coll span is at the beginning of a table} \\
-\bottomrule()
 \end{longtable}
 
 \end{document}

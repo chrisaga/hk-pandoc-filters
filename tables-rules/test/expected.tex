@@ -5,16 +5,19 @@
 \documentclass[
 ]{article}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -57,7 +60,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={table-vrules lua filter test file},
   pdfauthor={Christophe Agathon},
@@ -71,41 +74,39 @@
 \begin{document}
 \maketitle
 
-\hypertarget{simple-table}{%
-\section{Simple Table}\label{simple-table}}
+\section{Simple Table}\label{simple-table}
 
-\begin{longtable}[]{@{}|r|l|c|l|@{}}
+\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|r|l|c|l|}
 \caption{Demonstration of simple table syntax.}\tabularnewline
-\toprule()
+\toprule\noalign{}
 Right & Left & Center & Default \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 Right & Left & Center & Default \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 12 & 12 & 12 & 12 \\
-
 \midrule
 123 & 123 & 123 & 123 \\
-
 \midrule
 1 & 1 & 1 & 1 \\
-\bottomrule()
 \end{longtable}
 
-\hypertarget{multiline-tables}{%
-\section{Multiline Tables}\label{multiline-tables}}
+\section{Multiline Tables}\label{multiline-tables}
 
-\begin{longtable}[]{@{}
-  |>{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1667}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1111}}
-  |>{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2222}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3611}}|@{}}
+\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|
+  >{\centering\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.1667}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.1111}}|
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2222}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.3611}}|}
 \caption{Here's the caption. It, too, may span multiple
 lines.}\tabularnewline
-\toprule()
-\begin{minipage}[b]{\linewidth}\centering
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\smallskip
+\centering
 Centered Header
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Default Aligned
@@ -114,9 +115,9 @@ Right Aligned
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Left Aligned
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\centering
 Centered Header
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -126,35 +127,35 @@ Right Aligned
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Left Aligned
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 First & row & 12.0 & Example of a row that spans multiple lines. \\
-
 \midrule
 Second & row & 5.0 & Here's another one. Note the blank line between
 rows. \\
-\bottomrule()
 \end{longtable}
 
-\hypertarget{grid-tables}{%
-\section{Grid Tables}\label{grid-tables}}
+\section{Grid Tables}\label{grid-tables}
 
-\begin{longtable}[]{@{}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2222}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2222}}
-  |>{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2917}}|@{}}
+\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep - 2\arrayrulewidth) * \real{0.2222}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep - 2\arrayrulewidth) * \real{0.2222}}|
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep - 2\arrayrulewidth) * \real{0.2917}}|}
 \caption{Sample grid table.}\tabularnewline
-\toprule()
-\begin{minipage}[b]{\linewidth}\raggedright
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\smallskip
+\raggedright
 Fruit
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Price
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Advantages
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 \begin{minipage}[b]{\linewidth}\raggedright
 Fruit
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -162,8 +163,10 @@ Price
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Advantages
 \end{minipage} \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 Bananas & \$1.34 & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
 \tightlist
@@ -173,7 +176,6 @@ Bananas & \$1.34 & \begin{minipage}[t]{\linewidth}\raggedright
   bright color
 \end{itemize}
 \end{minipage} \\
-
 \midrule
 Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
@@ -184,30 +186,27 @@ Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
   tasty
 \end{itemize}
 \end{minipage} \\
-\bottomrule()
 \end{longtable}
 
-\hypertarget{pipes-tables}{%
-\section{Pipes Tables}\label{pipes-tables}}
+\section{Pipes Tables}\label{pipes-tables}
 
-\begin{longtable}[]{@{}|r|l|l|c|@{}}
+\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|r|l|l|c|}
 \caption{Demonstration of pipe table syntax.}\tabularnewline
-\toprule()
+\toprule\noalign{}
 Right & Left & Default & Center \\
-\midrule()
+\midrule\noalign{}
 \endfirsthead
-\toprule()
+\toprule\noalign{}
 Right & Left & Default & Center \\
-\midrule()
+\midrule\noalign{}
 \endhead
+\bottomrule\noalign{}
+\endlastfoot
 12 & 12 & 12 & 12 \\
-
 \midrule
 123 & 123 & 123 & 123 \\
-
 \midrule
 1 & 1 & 1 & 1 \\
-\bottomrule()
 \end{longtable}
 
 \end{document}
