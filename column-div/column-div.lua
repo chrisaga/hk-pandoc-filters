@@ -2,7 +2,7 @@
 column-div - leverage Pandoc native divs to make balanced and unbalanced column
              and other things based on class name and attributes.
 
-Copyright:  © 2021 Christophe Agathon <christophe.agathon@gmail.com>
+Copyright:  © 2021 - 2023 Christophe Agathon <christophe.agathon@gmail.com>
 License:    MIT – see LICENSE file for details
 
 Credits:    Romain Lesur and Yihui Xie for the original column filter
@@ -111,11 +111,6 @@ function Div(div)
 
       returned_list = begin_env .. div.content .. end_env
 
-    elseif div.classes:includes('tcblower') then
-      -- lower part of a custom "hkcard" (see below)
-      begin_env = List:new{pandoc.RawBlock('tex', '\\tcblower' )}
-      returned_list = begin_env .. div.content
-
     else
       -- other environments ex: multicols
       if div.classes:includes('multicols') then
@@ -127,37 +122,6 @@ function Div(div)
                                     '\\begin{' .. env .. '}' .. options)}
         end_env = List:new{pandoc.RawBlock('tex', '\\end{' .. env .. '}')}
 
-      elseif  div.classes:includes('hkcard') then
-	env = 'hkcard'
-        -- process title (mandatory parameter)
-        title = div.attributes.title
-	options = ''
-        --if opt then options = '{' .. opt .. '}' end
-	div.attributes.title = nil    -- consume attribute
-	-- process width (optional)
-	opt = div.attributes.width
-        if opt then
-          local width=tonumber(string.match(opt,'(%f[%d]%d[,.%d]*%f[%D])%%')
-	                      )/100
-          options = 'width=' .. tostring(width) .. '\\columnwidth'
-	  div.attributes.width = nil    -- consume attribute
-        end
-
-	-- pass other options to environment
-      	for k, v in pairs(div.attributes) do
-	  options = k ..'=' .. v .. ',' .. (options or '')
-	end
-	options = '[' .. options .. ']{' .. title .. '}'
-
-        begin_env = List:new{pandoc.RawBlock('tex',
-[[\setlength{\currentparskip}{\parskip}
-\begin{]]
-			 .. env .. '}' .. options ..
-[[
-
- \setlength{\parskip}{\currentparskip}]]
-                         )}
-        end_env = List:new{pandoc.RawBlock('tex', '\\end{' .. env .. '}')}
       else
 	env = nil -- we don't allow random environment
       end
