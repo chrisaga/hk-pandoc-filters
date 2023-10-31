@@ -38,7 +38,7 @@ function fix_coldef(m1, m2)
   n=m2:match('%(\\columnwidth %- ([%d%.]+)\\tabcolsep%)')
   return m1:gsub('[%d%.]+(\\tabcolsep)',
                  string.format('%d',n+2) .. '%1 - ' ..
-                 string.format('%d',n/2) ..'\\arrayrulewidth') .. '|'
+                 string.format('%d',2+n/2) ..'\\arrayrulewidth') .. '|'
 end
 
 -- Fix "simple style" column definition
@@ -47,16 +47,13 @@ function fix_simplestyle(m1,m2,m3)
 end
 
 -- Fix columns definitions for vertical rules
--- N.B. The \extracolsep substract the rule width to the column spacing
---      this could be a broblem with very thick lines
---      I think this is a bug somewhere in longtable | array | booktab
---      since the rule is added to the column separator (see array manual)
---      This seems to substract two times (left and right ??? not clear)
 function fix_colsdefs(m)
-  return m:gsub('^{@{}', '{@{\\extracolsep{-\\arrayrulewidth}}|')
+  --return m:gsub('^{@{}', '{@{\\extracolsep{-\\arrayrulewidth}}|')
+  --        :gsub('@{}}$', '}')
+  return m:gsub('^{@{}', '{|')
           :gsub('@{}}$', '}')
           :gsub('(>%b{}%l(%b{}))', fix_coldef) -- rich style
-          :gsub('({@%b{}|)(%l+)(})', fix_simplestyle) -- simple style
+          :gsub('({|)(%l+)(})', fix_simplestyle) -- simple style
 end
 
 -- Adjust minipage width for column separators
