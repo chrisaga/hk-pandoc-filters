@@ -36,11 +36,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-%begin tables-vrules.lua
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -51,10 +46,10 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-\setlength{\aboverulesep}{0pt}
-\setlength{\belowrulesep}{0pt}
-\renewcommand{\arraystretch}{1.3}
-%end tables-vrules.lua
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -70,15 +65,14 @@
 
 \begin{document}
 
-\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
-\multicolumn{4}{|l|}{%
-\begin{minipage}[b]{\linewidth - 2\tabcolsep -2\arrayrulewidth}\smallskip
-\raggedright
+\multicolumn{4}{@{}l@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
 \midrule\noalign{}
@@ -89,61 +83,49 @@ Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
 First-name\\
 Last-name\strut
 \end{minipage} \\
-\midrule
-Something: & \multicolumn{3}{l|}{%
+Something: & \multicolumn{3}{l@{}}{%
 Large cell spanning 3 columns} \\
-\midrule
 Regular cell & \multicolumn{2}{l}{%
 Medium cell spanning 2 columns} & Regular cell \\
-\midrule
-\multicolumn{2}{|l}{%
-Medium cell spanning 2 columns} & \multicolumn{2}{l|}{%
+\multicolumn{2}{@{}l}{%
+Medium cell spanning 2 columns} & \multicolumn{2}{l@{}}{%
 Medium cell spanning 2 columns} \\
-\midrule
-\multicolumn{3}{|l}{%
+\multicolumn{3}{@{}l}{%
 Large cell spanning 3 columns} & Some stuff \\
 \end{longtable}
 
-\begin{longtable}[]{@{\extracolsep{-\arrayrulewidth}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
-  >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
-\multicolumn{4}{|l|}{%
-\begin{minipage}[b]{\linewidth - 2\tabcolsep -2\arrayrulewidth}\smallskip
-\raggedright
+\multicolumn{4}{@{}l@{}}{%
+\begin{minipage}[b]{\linewidth}\raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
 \midrule\noalign{}
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\multicolumn{4}{|l|}{%
+\multicolumn{4}{@{}l@{}}{%
 This is to test If coll span is at the beginning of a table} \\
-\midrule
 Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
 First-name\\
 Last-name\strut
 \end{minipage} \\
-\midrule
-\multicolumn{4}{|l|}{%
+\multicolumn{4}{@{}l@{}}{%
 This is to test if coll span is in the middle of a table} \\
-\midrule
-Something: & \multicolumn{3}{l|}{%
+Something: & \multicolumn{3}{l@{}}{%
 Large cell spanning 3 columns} \\
-\midrule
 Regular cell & \multicolumn{2}{l}{%
 Medium cell spanning 2 columns} & Regular cell \\
-\midrule
-\multicolumn{2}{|l}{%
-Medium cell spanning 2 columns} & \multicolumn{2}{l|}{%
+\multicolumn{2}{@{}l}{%
+Medium cell spanning 2 columns} & \multicolumn{2}{l@{}}{%
 Medium cell spanning 2 columns} \\
-\midrule
-\multicolumn{3}{|l}{%
+\multicolumn{3}{@{}l}{%
 Large cell spanning 3 columns} & Some stuff \\
-\midrule
-\multicolumn{4}{|l|}{%
+\multicolumn{4}{@{}l@{}}{%
 This is to test if coll span is at the end of a table} \\
 \end{longtable}
 

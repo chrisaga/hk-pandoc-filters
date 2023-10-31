@@ -38,3 +38,14 @@ test/expected2.tex: $(FILTER_FILE) test/input2.html
 	$(PANDOC) --metadata=tables-vrules --metadata=tables-hrules --lua-filter=$< --standalone --to=latex --output=$@ \
 		test/input2.html
 
+# Generate the plain pandoc document without the filter
+plain: test/plain.tex test/plain2.tex
+
+test/plain.tex: $(FILTER_FILE) test/input.md
+	$(PANDOC) --standalone --to=latex --output=$@ \
+		test/input.md
+
+test/plain2.tex: $(FILTER_FILE) test/input2.html
+	$(PANDOC) --standalone --to=latex --output=$@ \
+		test/input2.html
+
