@@ -61,11 +61,18 @@ end
 
 -- Adjust minipage width for column separators
 -- Substract \tabcolsep two times (left and rigth of the cell)
--- N.B. Substracting \arrayrulewidth is needed to avoid warnings
---      is it linked to the possible bug mentioned above ?
+-- Minipages in one column cell don't need that since the \linewidth is OK
+-- TODO: not needed anymore since pandoc 3.1.9
 function adjust_minipage(m1, m2, m3)
   return m1 .. m2:gsub('}', ' - 2\\tabcolsep -2\\arrayrulewidth}')
             .. m3
+end
+
+-- Adjust width of p cell for column separators
+-- Substract \tabcolsep two times (left and rigth of the cell)
+-- Generated LaTeX is not optimized, but robust
+function adjust_p(m1, m2)
+  return m1 .. m2:gsub('}$', ' -2\\tabcolsep -2\\arrayrulewidth}')
 end
 
 -- Give some space to minipages between text and horizontal rule
@@ -74,10 +81,12 @@ function pad_minipage(m1, m2, m3)
 end
 
 -- Fix multicolumn cells
+-- '|' where pandoc suppressed the colsep (@{})
+-- plus on the right of each one (avoiding '||')
 function fix_multicol(command, coldef, content)
-  return command .. coldef:gsub('@{}','|') ..
-          content:gsub('(\\begin{minipage}%b[])(%b{})(.*\\end{minipage})',
-          adjust_minipage)
+  return command .. coldef:gsub('@%b{}','|'):gsub('|?}$','|}')
+                          :gsub('(p)(%b{})', adjust_p)
+         .. content
 end
 
 -- Main filter function

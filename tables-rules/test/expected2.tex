@@ -76,8 +76,8 @@
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|}
 \toprule\noalign{}
-\multicolumn{4}{|l|}{%
-\begin{minipage}[b]{\linewidth - 2\tabcolsep -2\arrayrulewidth}\smallskip
+\multicolumn{4}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
+\begin{minipage}[b]{\linewidth}\smallskip
 \raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
@@ -90,17 +90,20 @@ First-name\\
 Last-name\strut
 \end{minipage} \\
 \midrule
-Something: & \multicolumn{3}{l|}{%
+Something: &
+\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 Large cell spanning 3 columns} \\
 \midrule
-Regular cell & \multicolumn{2}{l}{%
+Regular cell &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 Medium cell spanning 2 columns} & Regular cell \\
 \midrule
-\multicolumn{2}{|l}{%
-Medium cell spanning 2 columns} & \multicolumn{2}{l|}{%
+\multicolumn{2}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
+Medium cell spanning 2 columns} &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 Medium cell spanning 2 columns} \\
 \midrule
-\multicolumn{3}{|l}{%
+\multicolumn{3}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 Large cell spanning 3 columns} & Some stuff \\
 \end{longtable}
 
@@ -110,8 +113,8 @@ Large cell spanning 3 columns} & Some stuff \\
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|
   >{\raggedright\arraybackslash}p{(\columnwidth - 8\tabcolsep - 3\arrayrulewidth) * \real{0.2500}}|}
 \toprule\noalign{}
-\multicolumn{4}{|l|}{%
-\begin{minipage}[b]{\linewidth - 2\tabcolsep -2\arrayrulewidth}\smallskip
+\multicolumn{4}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
+\begin{minipage}[b]{\linewidth}\smallskip
 \raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
@@ -119,7 +122,7 @@ Large cell spanning on 4 columns
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\multicolumn{4}{|l|}{%
+\multicolumn{4}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 This is to test If coll span is at the beginning of a table} \\
 \midrule
 Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
@@ -127,23 +130,27 @@ First-name\\
 Last-name\strut
 \end{minipage} \\
 \midrule
-\multicolumn{4}{|l|}{%
+\multicolumn{4}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 This is to test if coll span is in the middle of a table} \\
 \midrule
-Something: & \multicolumn{3}{l|}{%
-Large cell spanning 3 columns} \\
+Something: &
+\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
+Large cell spanning 3 columns with loooooong looooong looong long text.
+This works fine since pandoc v3.1.9} \\
 \midrule
-Regular cell & \multicolumn{2}{l}{%
+Regular cell &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 Medium cell spanning 2 columns} & Regular cell \\
 \midrule
-\multicolumn{2}{|l}{%
-Medium cell spanning 2 columns} & \multicolumn{2}{l|}{%
+\multicolumn{2}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
+Medium cell spanning 2 columns} &
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 Medium cell spanning 2 columns} \\
 \midrule
-\multicolumn{3}{|l}{%
+\multicolumn{3}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 Large cell spanning 3 columns} & Some stuff \\
 \midrule
-\multicolumn{4}{|l|}{%
+\multicolumn{4}{|>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep -2\tabcolsep -2\arrayrulewidth}|}{%
 This is to test if coll span is at the end of a table} \\
 \end{longtable}
 
