@@ -5,16 +5,19 @@
 \documentclass[
 ]{article}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
 \else % if luatex or xetex
-  \usepackage{unicode-math}
+  \usepackage{unicode-math} % this also loads fontspec
   \defaultfontfeatures{Scale=MatchLowercase}
   \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
 \fi
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
@@ -44,7 +47,7 @@
 \fi
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\urlstyle{same} % disable monospaced font for URLs
+\urlstyle{same}
 \hypersetup{
   pdftitle={Test},
   hidelinks,
@@ -57,16 +60,14 @@
 \begin{document}
 \maketitle
 
-\hypertarget{column-div-test}{%
-\section{column-div test}\label{column-div-test}}
+\section{column-div test}\label{column-div-test}
 
 content\ldots{}
 
-\leavevmode\vadjust pre{\hypertarget{thisdivdoesnothing}{}}%
+\phantomsection\label{thisdivdoesnothing}
 content\ldots{}
 
-\hypertarget{three-columns}{%
-\subsection{Three columns}\label{three-columns}}
+\subsection{Three columns}\label{three-columns}
 
 \begin{multicols}{3}
 
@@ -78,8 +79,7 @@ content\ldots{}
 
 \end{multicols}
 
-\hypertarget{two-uneven-columns}{%
-\subsection{Two uneven columns}\label{two-uneven-columns}}
+\subsection{Two uneven columns}\label{two-uneven-columns}
 
 \bigskip
 
@@ -101,8 +101,7 @@ contents\ldots{}
 
 \bigskip
 
-\hypertarget{columns-in-columns}{%
-\subsection{Columns in columns}\label{columns-in-columns}}
+\subsection{Columns in columns}\label{columns-in-columns}
 
 \begin{multicols}{3}
 
@@ -168,8 +167,7 @@ contents\ldots{}
 
 \end{multicols}
 
-\hypertarget{columns-and-colors}{%
-\subsection{Columns and Colors}\label{columns-and-colors}}
+\subsection{Columns and Colors}\label{columns-and-colors}
 
 \bigskip
 
