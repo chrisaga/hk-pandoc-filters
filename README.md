@@ -5,7 +5,7 @@ HK Pandoc Filters
 
 This repository hosts some [Lua filters][] I wrote for [Pandoc][], the universal document converter. Those filters are used to customize the way documents are converted from one format to another.
 
-This repository is initially based on tarleb's (Albert Krewinkel) [lua-filter-template][] on github. As I decided to hos multiple filter in one repository, I adapted the structure to have one directory per filter. Docs, tests and Makefiles still need to be adapted.
+This repository is initially based on tarleb's (Albert Krewinkel) [lua-filter-template][] on github. As I decided to host multiple filter in one repository, I adapted the structure to have one directory per filter.
 
 I you feel like developing your own filters, I strongly advise you to start with tarleb's template.
 
@@ -21,7 +21,7 @@ Use case
 
 My main use case is to process Markdown files with [Pandoc][] to produce HTML and PDF documents with similar rendering. Plain Pandoc renders some document features in html not in pdf (or the other way around). I try to make HTML and PDF rendering the most looking alike possible.
 
-Those filters can be used to process source file from multiple different formats . They are ineffective if output format is other than HTML, PDF, or LaTeX
+Those filters can be used to process source file from multiple different formats . They are not tested for output formats other than HTML, PDF, or LaTeX.
 
 
 List of filters
