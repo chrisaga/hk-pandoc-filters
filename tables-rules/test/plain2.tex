@@ -50,9 +50,6 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -66,12 +63,12 @@
 \begin{document}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
-\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
+\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
 \begin{minipage}[b]{\linewidth}\raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
@@ -84,26 +81,26 @@ First-name\\
 Last-name\strut
 \end{minipage} \\
 Something: &
-\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}@{}}{%
+\multicolumn{3}{>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}@{}}{%
 Large cell spanning 3 columns} \\
 Regular cell &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
 Medium cell spanning 2 columns} & Regular cell \\
-\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
 Medium cell spanning 2 columns} &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}@{}}{%
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}@{}}{%
 Medium cell spanning 2 columns} \\
-\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}}{%
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}}{%
 Large cell spanning 3 columns} & Some stuff \\
 \end{longtable}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2500}}@{}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2500}}@{}}
 \toprule\noalign{}
-\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
+\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
 \begin{minipage}[b]{\linewidth}\raggedright
 Large cell spanning on 4 columns
 \end{minipage}} \\
@@ -111,28 +108,28 @@ Large cell spanning on 4 columns
 \endhead
 \bottomrule\noalign{}
 \endlastfoot
-\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
+\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
 This is to test If coll span is at the beginning of a table} \\
 Name: & None & Updated by: & \begin{minipage}[t]{\linewidth}\raggedright
 First-name\\
 Last-name\strut
 \end{minipage} \\
-\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
+\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
 This is to test if coll span is in the middle of a table} \\
 Something: &
-\multicolumn{3}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}@{}}{%
+\multicolumn{3}{>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}@{}}{%
 Large cell spanning 3 columns with loooooong looooong looong long text.
 This works fine since pandoc v3.1.9} \\
 Regular cell &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
 Medium cell spanning 2 columns} & Regular cell \\
-\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
+\multicolumn{2}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}}{%
 Medium cell spanning 2 columns} &
-\multicolumn{2}{>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}@{}}{%
+\multicolumn{2}{>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.5000} + 2\tabcolsep}@{}}{%
 Medium cell spanning 2 columns} \\
-\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}}{%
+\multicolumn{3}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.7500} + 4\tabcolsep}}{%
 Large cell spanning 3 columns} & Some stuff \\
-\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
+\multicolumn{4}{@{}>{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{1.0000} + 6\tabcolsep}@{}}{%
 This is to test if coll span is at the end of a table} \\
 \end{longtable}
 

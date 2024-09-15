@@ -35,7 +35,12 @@ end
 --  add right vertical rule
 --  adjust width for column separtion and rule width
 function fix_coldef(m1, m2)
+  --- At some point (pandoc v3.4 or before) \columnwidth became \linewidth
   n=m2:match('%(\\columnwidth %- ([%d%.]+)\\tabcolsep%)')
+  if not n then
+    n=m2:match('%(\\linewidth %- ([%d%.]+)\\tabcolsep%)')
+  end 
+
   return m1:gsub('[%d%.]+(\\tabcolsep)',
                  string.format('%d',n+2) .. '%1 - ' ..
                  string.format('%d',2+n/2) ..'\\arrayrulewidth') .. '|'
