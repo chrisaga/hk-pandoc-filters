@@ -38,3 +38,7 @@ test/expected.tex: $(FILTER_FILE) test/input.md
 	$(PANDOC) --lua-filter=$< --standalone --to=latex --output=$@ \
 		test/input.md
 
+test/expected.ast: $(FILTER_FILE) test/input.md
+	$(PANDOC) --lua-filter=$< --standalone --to=native --output=$@ \
+		test/input.md
+
