@@ -78,3 +78,14 @@ blue content  on red background...
 contents...
 :::
 ::::::
+
+## Figures
+
+:::::: {.columns}
+::: {.column width="40%" background-color="blue"}
+![The moon](lalune.jpg)
+:::
+::: {.column width="60%" background-color="red"}
+![The moon](lalune.jpg)
+:::
+::::::
